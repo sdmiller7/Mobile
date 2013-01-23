@@ -45,6 +45,30 @@
 #endif
 }
 
++(void)debugLoggingCaller:(BOOL)logCaller withStringFormat:(NSString *)format,...
+{
+    if(format)
+    {
+        va_list args;
+        va_start(args, format);
+        NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
+        va_end(args);
+        [CBLEUtils debugLog:result logCaller:logCaller];
+    }
+}
+
++(void)debugLogWithFormat:(NSString *)format,...
+{
+    if(format)
+    {
+        va_list args;
+        va_start(args, format);
+        NSString *result = [[NSString alloc] initWithFormat:format arguments:args];
+        va_end(args);
+        [CBLEUtils debugLog:result];
+    }
+}
+
 +(void)debugLog:(NSString*)debugString
 {
     [CBLEUtils debugLog:debugString logCaller:NO];

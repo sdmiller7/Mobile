@@ -31,7 +31,11 @@
 
 -(BOOL)locationNeedsUpdating;
 -(void)getNewLocation;
+-(BOOL)canUseCoreLocation;
 -(BOOL)updateWaitingTransfersWithLocation;
+
+-(NSData*)getUUIDPayloadDataWithUUID:(NSString*)uuid;
+
 -(void)applicationWillEnterBackground:(NSNotification*)note;
 -(void)applicationDidEnterForeground:(NSNotification*)note;
 @end
@@ -66,7 +70,37 @@
     [super finish];
 }
 
+-(NSData*)getUUIDPayloadDataWithUUID:(NSString*)uuid
+{
+    NSData *response = nil;
+    if(uuid.length>0)
+    {
+        NSMutableDictionary *payloadDictionary = [NSMutableDictionary dictionary];
+        [payloadDictionary setObject:uuid forKey:@"uuid"];
+        if(_currentLocation)
+        {
+            NSTimeInterval deltaT = ABS([_currentLocation.timestamp timeIntervalSinceNow]);
+            NSDictionary *locationDictionary = @{@"long":[NSNumber numberWithFloat:_currentLocation.coordinate.longitude],@"lat":[NSNumber numberWithFloat:_currentLocation.coordinate.latitude],@"alt":[NSNumber numberWithDouble:_currentLocation.altitude],@"hacc":[NSNumber numberWithDouble:_currentLocation.horizontalAccuracy],@"vacc":[NSNumber numberWithDouble:_currentLocation.verticalAccuracy],@"deltat":[NSNumber numberWithDouble:deltaT]};
+            [payloadDictionary setObject:locationDictionary forKey:@"location"];
+        }
+        @try
+        {
+            response = [NSKeyedArchiver archivedDataWithRootObject:payloadDictionary];
+        }
+        @catch(NSException* ex)
+        {
+            [CBLEUtils debugLogWithFormat:@"CBLEInternalUUIServer(getUUIDPayloadData) Exception: %@",ex];
+        }
+    }
+    return response;
+}
+
 #pragma mark - CLLoation
+
+-(BOOL)canUseCoreLocation
+{
+    return [CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized;
+}
 
 -(BOOL)locationNeedsUpdating
 {
@@ -116,30 +150,22 @@
 -(BOOL)updateWaitingTransfersWithLocation
 {
     BOOL transfersUpdated = NO;
-    if(_currentLocation)
+    NSMutableArray *itemsToDelete = [NSMutableArray arrayWithCapacity:_transfersWaitingForLocation.count];
+    NSData *payload = [self getUUIDPayloadDataWithUUID:[NSString UUID]];
+    for(CBLECharacteristicTransfer *trans in _transfersWaitingForLocation)
     {
-        NSMutableArray *itemsToDelete = [NSMutableArray arrayWithCapacity:_transfersWaitingForLocation.count];
-        NSMutableDictionary *payloadDictionary = [NSMutableDictionary dictionary];
-        [payloadDictionary setObject:[NSString UUID] forKey:@"uuid"];
-        if(_currentLocation)
-        {
-            NSTimeInterval deltaT = ABS([_currentLocation.timestamp timeIntervalSinceNow]);
-            NSDictionary *locationDictionary = @{@"long":[NSNumber numberWithFloat:_currentLocation.coordinate.longitude],@"lat":[NSNumber numberWithFloat:_currentLocation.coordinate.latitude],@"alt":[NSNumber numberWithDouble:_currentLocation.altitude],@"hacc":[NSNumber numberWithDouble:_currentLocation.horizontalAccuracy],@"vacc":[NSNumber numberWithDouble:_currentLocation.verticalAccuracy],@"deltat":[NSNumber numberWithDouble:deltaT]};
-            [payloadDictionary setObject:locationDictionary forKey:@"location"];
-        }
-        NSData *payload = [NSKeyedArchiver archivedDataWithRootObject:payloadDictionary];
+        trans.dataToSend = payload;
+        [itemsToDelete addObject:trans];
         
-        for(CBLECharacteristicTransfer *trans in _transfersWaitingForLocation)
+        if(![trans didConnectionTimedOut])
         {
-            trans.dataToSend = payload;
-            [itemsToDelete addObject:trans];
             [_pendingTransfers addObject:trans];
             transfersUpdated = YES;
         }
-        if(itemsToDelete.count >0)
-        {
-            [_transfersWaitingForLocation removeObjectsInArray:itemsToDelete];
-        }
+    }
+    if(itemsToDelete.count >0)
+    {
+        [_transfersWaitingForLocation removeObjectsInArray:itemsToDelete];
     }
     return transfersUpdated;
 }
@@ -195,9 +221,11 @@
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
     [geoCoder reverseGeocodeLocation:_currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
     {
+        //dispatched on the main queue... change it to the _cbQueue
         dispatch_async(_cbQueue, ^{
             for (CLPlacemark *placemark in placemarks)
             {
+                //for later... righ no, debug
                 //[placemark locality];
                 //NSString *city = [placemark.addressDictionary objectForKey:(NSString*)kABPersonAddressCityKey];
             }
@@ -328,50 +356,44 @@
                 //TODO: later, call/sync with delegate and get the data for the characteristic.
                 //side note, you could pass in a data object that conforms to a protocol that has, -(NSData)getDataForUUID:(CBUUID)uuid, -(void)setData:(NSData*)data forUUID:(CBUUID)uuid
                 
+                CBLECharacteristicTransfer *trans = [CBLECharacteristicTransfer transfer];
+                trans.characteristic = (CBMutableCharacteristic*)characteristic;
+                trans.central = central;
+                
                 if([characteristicUUIDString isEqual:kFLOATINGUUID_CHARACTERISTIC_UUID])
                 {
-                    if(![self locationNeedsUpdating])
+                    if([self canUseCoreLocation])
                     {
-                        CBLECharacteristicTransfer *trans = [CBLECharacteristicTransfer transfer];
-                        NSMutableDictionary *payload = [NSMutableDictionary dictionary];
-                        
-                        [payload setObject:[NSString UUID] forKey:@"uuid"];
-                        if(_currentLocation)
+                        if(![self locationNeedsUpdating])
                         {
-                            NSTimeInterval deltaT = ABS([_currentLocation.timestamp timeIntervalSinceNow]);
-                            NSDictionary *locationDictionary = @{@"long":[NSNumber numberWithFloat:_currentLocation.coordinate.longitude],@"lat":[NSNumber numberWithFloat:_currentLocation.coordinate.latitude],@"alt":[NSNumber numberWithDouble:_currentLocation.altitude],@"hacc":[NSNumber numberWithDouble:_currentLocation.horizontalAccuracy],@"vacc":[NSNumber numberWithDouble:_currentLocation.verticalAccuracy],@"deltat":[NSNumber numberWithDouble:deltaT]};
-                            [payload setObject:locationDictionary forKey:@"location"];
+                            trans.dataToSend = [self getUUIDPayloadDataWithUUID:[NSString UUID]];//random, for now;
+                            [_pendingTransfers addObject:trans];
+                            startSendingData = YES;
                         }
-                        
-                        trans.dataToSend = [NSKeyedArchiver archivedDataWithRootObject:payload];//random, for now;
-                        trans.characteristic = (CBMutableCharacteristic*)characteristic;
-                        trans.central = central;
-                        [_pendingTransfers addObject:trans];
-                        startSendingData = YES;
+                        else
+                        {
+                            [_transfersWaitingForLocation addObject:trans];
+                            [self getNewLocation];
+                            //startSendingData = YES;
+                        }
                     }
                     else
                     {
-                        CBLECharacteristicTransfer *trans = [CBLECharacteristicTransfer transfer];
-                        trans.characteristic = (CBMutableCharacteristic*)characteristic;
-                        trans.central = central;
-                        [_transfersWaitingForLocation addObject:trans];
-                        [self getNewLocation];
-                        //startSendingData = YES;
+                        trans.dataToSend = [self getUUIDPayloadDataWithUUID:[NSString UUID]];//random, for now;
+                        [_pendingTransfers addObject:trans];
+                        startSendingData = YES;
                     }
                 }
                 else if([characteristicUUIDString isEqual:kDEVICEID_CHARACTERISTIC_UUID])
                 {
-                    CBLECharacteristicTransfer *trans = [CBLECharacteristicTransfer transfer];
-                    NSDictionary *payload = @{@"deviceid":_deviceID};
-                    trans.dataToSend = [NSKeyedArchiver archivedDataWithRootObject:payload];
-                    trans.characteristic = (CBMutableCharacteristic*)characteristic;
-                    trans.central = central;
+                    NSDictionary *payloadDictionary = @{@"deviceid":_deviceID};
+                    trans.dataToSend = [NSKeyedArchiver archivedDataWithRootObject:payloadDictionary];
                     [_pendingTransfers addObject:trans];
                     startSendingData = YES;
                 }
                 else
                 {
-                    
+                    //?? nothing should come here... for later...
                 }
             }
         }
@@ -381,7 +403,7 @@
         }
         else
         {
-            //TODO: cancel the connection?? timeout??
+            //TODO: cancel the connection?? timeout?? ... client should timout naturally?? <- need to add that logic to client
         }
     }
 }

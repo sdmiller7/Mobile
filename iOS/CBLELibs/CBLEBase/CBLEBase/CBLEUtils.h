@@ -13,6 +13,8 @@
     
 }
 
++(void)debugLoggingCaller:(BOOL)logCaller withStringFormat:(NSString *)format,...;
++(void)debugLogWithFormat:(NSString *)format,...;
 +(void)debugLog:(NSString*)debugString;
 +(void)debugLog:(NSString*)debugString logCaller:(BOOL)logCaller;
 @end
