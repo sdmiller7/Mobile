@@ -29,8 +29,19 @@ extern NSString * const kCBLECharacteristicTransferEOM;
 +(CBLECharacteristicTransfer*)transfer;
 +(CBLECharacteristicTransfer*)transferWithData:(NSData*)data;
 
+/**
+ Thread-safe
+ */
 -(BOOL)isFinishedSendingPayload;
+
+/**
+ Thread-safe
+ */
 -(BOOL)didConnectionTimedOut;
+
+/**
+ Thread-safe
+ */
 -(void)stopConnectionTimer;
 
 @end

@@ -16,6 +16,8 @@
 
 #define kCLMINHorizontalAccuracy 100//in meters
 
+const unsigned short kCBLEUUIDServerVersion = 1;//16bits... 65535 versions
+
 
 #pragma mark - CBLEUUIDInternalServer
 @interface CBLEUUIDInternalServer : CBLEServer
@@ -509,7 +511,10 @@
     
     CBMutableCharacteristic *deviceIDCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kFLOATINGUUID_CHARACTERISTIC_UUID] properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
     
-    [service setCharacteristics:@[UUIDCharacteristic, deviceIDCharacteristic]];
+    NSData *versionData = [NSData dataWithBytes:&kCBLEUUIDServerVersion length:sizeof(kCBLEUUIDServerVersion)];
+    CBMutableCharacteristic *versionCharacteristic = [[CBMutableCharacteristic alloc] initWithType:[CBUUID UUIDWithString:kFLOATINGUUID_SERVICE_VERSION_UUID] properties:CBCharacteristicPropertyBroadcast value:versionData permissions:CBAttributePermissionsReadable];//should be ale to read this in 1 transmission... no need to register for notification changes, the client should just try to read this value and wait for the callback
+    
+    [service setCharacteristics:@[UUIDCharacteristic, deviceIDCharacteristic, versionCharacteristic]];
     self.services = @[service];
     _cbServer = [[CBLEUUIDInternalServer alloc] initWithServices:self.services];
     _cbServer.deviceID = self.deviceID;

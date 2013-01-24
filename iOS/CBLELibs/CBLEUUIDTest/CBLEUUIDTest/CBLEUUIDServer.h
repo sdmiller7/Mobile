@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern const unsigned short kCBLEUUIDServerVersion;
+
 @interface CBLEUUIDServer : NSObject
 {
     
@@ -15,6 +17,13 @@
 
 
 -(id)initServerWithDeviceID:(NSString*)deviceID;
+/**
+ Thread-safe
+ */
 -(void)start;
+
+/**
+ Thread-safe
+ */
 -(void)cancel;
 @end
