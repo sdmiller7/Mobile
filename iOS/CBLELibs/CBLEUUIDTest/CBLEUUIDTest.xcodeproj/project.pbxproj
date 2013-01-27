@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6163DCCE16B4723700AE6706 /* CBLEUUIDClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6163DCCD16B4723700AE6706 /* CBLEUUIDClient.m */; };
 		616D98CF16ACD270004F556F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616D98CE16ACD270004F556F /* Foundation.framework */; };
 		616D98D416ACD270004F556F /* CBLEUUIDTest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 616D98D316ACD270004F556F /* CBLEUUIDTest.h */; };
 		616D98E116ACD2C8004F556F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616D98DC16ACD2C8004F556F /* CoreBluetooth.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6163DCCC16B4723700AE6706 /* CBLEUUIDClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBLEUUIDClient.h; sourceTree = "<group>"; };
+		6163DCCD16B4723700AE6706 /* CBLEUUIDClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBLEUUIDClient.m; sourceTree = "<group>"; };
 		616D98CB16ACD270004F556F /* libCBLEUUIDTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCBLEUUIDTest.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		616D98CE16ACD270004F556F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		616D98D216ACD270004F556F /* CBLEUUIDTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CBLEUUIDTest-Prefix.pch"; sourceTree = "<group>"; };
@@ -113,6 +116,8 @@
 				616D98ED16ACD405004F556F /* CBLECharacteristicTransfer.m */,
 				616D98E916ACD306004F556F /* CBLEUUIDServer.h */,
 				616D98EA16ACD306004F556F /* CBLEUUIDServer.m */,
+				6163DCCC16B4723700AE6706 /* CBLEUUIDClient.h */,
+				6163DCCD16B4723700AE6706 /* CBLEUUIDClient.m */,
 				616D98D316ACD270004F556F /* CBLEUUIDTest.h */,
 				616D98D116ACD270004F556F /* Supporting Files */,
 			);
@@ -188,6 +193,7 @@
 			files = (
 				616D98EB16ACD306004F556F /* CBLEUUIDServer.m in Sources */,
 				616D98EE16ACD405004F556F /* CBLECharacteristicTransfer.m in Sources */,
+				6163DCCE16B4723700AE6706 /* CBLEUUIDClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:CBLECoreLocationLib/CBLECoreLocationLib.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:CBLEUUIDTest/CBLEUUIDTest.xcodeproj">
    </FileRef>
    <FileRef
