@@ -23,7 +23,7 @@ const unsigned short kCBLEUUIDServerVersion = 1;//16bits... 65535 versions
 @interface CBLEUUIDInternalServer : CBLEServer
 <CLLocationManagerDelegate>
 {
-    __strong NSMutableArray * _pendingTransfers;
+    __strong NSMutableArray * _pendingTransfers;//are we going to support multiple concurrent connections? Does this fit our model?
     __strong NSMutableArray * _transfersWaitingForLocation;
     __strong CLLocation * _currentLocation;
     __strong CLLocationManager * _locationManager;
@@ -95,6 +95,72 @@ const unsigned short kCBLEUUIDServerVersion = 1;//16bits... 65535 versions
         }
     }
     return response;
+}
+
+-(void)continueSendingDataToClients
+{
+    for(CBLECharacteristicTransfer *trans in _pendingTransfers)
+    {
+        NSUInteger chunkSize = 0;
+        NSData *chunk = nil;
+        BOOL dataSent = NO;
+        if(trans.byteOffset < trans.dataToSend.length)
+        {
+            do{
+                chunkSize = MIN(kCBLEServerMaxMTU,(trans.dataToSend.length-trans.byteOffset));
+                chunk = [trans.dataToSend subdataWithRange:NSMakeRange(trans.byteOffset, chunkSize)];
+                dataSent = [_peripheralManager updateValue:chunk forCharacteristic:trans.characteristic onSubscribedCentrals:@[trans.central]];
+                if(dataSent)
+                {
+                    trans.byteOffset += chunk.length;
+                    [CBLEUtils debugLogWithFormat:@"<continueSendingDataToClients> Sent %i bytes to CBCentral<%p>",chunk.length, trans.central];
+                    
+                    if(![NSThread isMainThread] && dataSent)
+                    {
+                        [NSThread sleepForTimeInterval:0.001];//adds non-trivial wait while backgrounded (due to broadcast infrequency)... needed?
+                    }
+                }
+                //else wait for peripheralManagerIsReadyToUpdateSubscribers: callback
+                
+            }while(dataSent && (trans.byteOffset < trans.dataToSend.length));
+            
+            if(dataSent && (trans.byteOffset == trans.dataToSend.length))
+            {
+                //try to send EOM
+                chunk = [kCBLECharacteristicTransferEOM dataUsingEncoding:NSUTF8StringEncoding];
+                dataSent = [_peripheralManager updateValue:chunk forCharacteristic:trans.characteristic onSubscribedCentrals:@[trans.characteristic]];
+                if(dataSent)
+                {
+                    trans.byteOffset += chunk.length;
+                    [CBLEUtils debugLogWithFormat:@"<continueSendingDataToClients> Sent EOM %i bytes to CBCentral<%p>",chunk.length, trans.central];
+                    trans.didSendEOM = YES;
+                    //TODO: something?
+                }
+                //else wait for peripheralManagerIsReadyToUpdateSubscribers: callback
+            }
+        }
+        else
+        {
+            if(!trans.didSendEOM)
+            {
+                //try to send the EOM
+                chunk = [kCBLECharacteristicTransferEOM dataUsingEncoding:NSUTF8StringEncoding];
+                dataSent = [_peripheralManager updateValue:chunk forCharacteristic:trans.characteristic onSubscribedCentrals:@[trans.characteristic]];
+                if(dataSent)
+                {
+                    trans.byteOffset += chunk.length;
+                    [CBLEUtils debugLogWithFormat:@"<continueSendingDataToClients> Sent EOM %i bytes to CBCentral<%p>",chunk.length, trans.central];
+                    trans.didSendEOM = YES;
+                    //TODO: something?
+                }
+                //else wait for peripheralManagerIsReadyToUpdateSubscribers: callback
+            }
+            else
+            {
+                //TODO: something?
+            }
+        }
+    }
 }
 
 #pragma mark - CLLoation

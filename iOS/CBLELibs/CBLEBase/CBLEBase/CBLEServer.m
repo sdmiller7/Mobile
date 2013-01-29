@@ -14,6 +14,7 @@
 
 
 @interface CBLEServer ()
+<CBPeripheralManagerDelegate>
 {
     
 }
@@ -28,7 +29,7 @@
 
 -(void)dealloc
 {
-    [self finish];
+    [self cancel];
     //[super dealloc];
 }
 

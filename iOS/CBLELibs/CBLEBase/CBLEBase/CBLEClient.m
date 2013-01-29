@@ -13,6 +13,7 @@
 
 
 @interface CBLEClient ()
+<CBCentralManagerDelegate,CBPeripheralDelegate>
 {
     
 }
@@ -22,6 +23,10 @@
 
 
 @implementation CBLEClient
+-(void)dealloc
+{
+    [self cancel];
+}
 +(NSString*)errorDomain
 {
     return [NSString stringWithFormat:@"%@.%@",[[NSBundle mainBundle] bundleIdentifier],@"CBLEClient"];
@@ -51,7 +56,10 @@
 #pragma mark - Start/Stop
 -(void)cancel
 {
-    [self finish];
+    if(_isFinishing){return;}
+    dispatch_async(_cbQueue, ^{
+        [self finish];
+    });
 }
 
 -(void)start

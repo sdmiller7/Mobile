@@ -25,6 +25,7 @@ const unsigned short kCBLEUUIDClientVersion = 1;
     NSMutableDictionary * __strong _serverHistory;
     NSMutableDictionary * __strong _currentTransfers;
     NSMutableDictionary * __strong _peripheralConnections;
+    NSMutableArray * __strong _connectingPeripherals;//needed in ARC... eh
     
     __strong CLLocationManager * _locationManager;//when do we use this? when communicating with the server?
     __strong CLLocation * _currentLocation;//when do we use this? when communicating with the server?
@@ -38,6 +39,15 @@ const unsigned short kCBLEUUIDClientVersion = 1;
 -(void)dealloc
 {
     
+}
+
+-(void)internalInit
+{
+    [super internalInit];
+    _connectingPeripherals = [NSMutableArray array];
+    _currentTransfers = [NSMutableDictionary dictionary];
+    _peripheralConnections = [NSMutableDictionary dictionary];
+    _serverHistory = [NSMutableDictionary dictionary];
 }
 
 -(void)finish
@@ -161,11 +171,13 @@ const unsigned short kCBLEUUIDClientVersion = 1;
     
     //connect
     [CBLEUtils debugLog:[NSString stringWithFormat:@"Connecting to peripheral <%p>", peripheral]];
+    [_connectingPeripherals addObject:peripheral];//needed for ARC, retain it, or else... potential for crash
     [_centralManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey:[NSNumber numberWithBool:YES]}];
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
+    [_connectingPeripherals removeObject:peripheral];
     [CBLEUtils debugLog:[NSString stringWithFormat:@"Failed to connect to %@. (%@)", peripheral, [error localizedDescription]]];
     
     //[self startScanning];//needed??
@@ -184,6 +196,7 @@ const unsigned short kCBLEUUIDClientVersion = 1;
             //we've seen this peripheral in the past kMIN_CONNECTION_MEMORY, disconnect from it
             [CBLEUtils debugLogWithFormat:@"CentralManager<%p><didDiscoverPeripheral> connected to this peripheral<%p> %d second(s) ago. We won't allow another re-connect for anthoer %d second(s).",central,peripheral,deltaT,ABS(deltaT-kMIN_CONNECTION_MEMORY)];
             [_centralManager cancelPeripheralConnection:peripheral];
+             [_connectingPeripherals removeObject:peripheral];
             [self cleanUpHistory];
             return;
         }
@@ -197,6 +210,7 @@ const unsigned short kCBLEUUIDClientVersion = 1;
     {
         [_peripheralConnections setObject:peripheral forKey:peripheralUUIDStringRep];
     }
+    [_connectingPeripherals removeObject:peripheral];
 }
 
 #pragma mark -- CBPeripheralDelegate Methods
