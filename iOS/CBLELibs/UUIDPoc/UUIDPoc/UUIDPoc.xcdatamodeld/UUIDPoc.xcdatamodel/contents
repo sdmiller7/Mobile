@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="DebugLogs" representedClassName="DBDebugLog" syncable="YES">
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="message" attributeType="String" syncable="YES"/>
+        <relationship name="test" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="debugLogs" inverseEntity="Tests" syncable="YES"/>
+    </entity>
+    <entity name="Errors" representedClassName="DBErrors" syncable="YES">
+        <attribute name="cause" attributeType="String" syncable="YES"/>
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <relationship name="test" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="errors" inverseEntity="Tests" syncable="YES"/>
+    </entity>
+    <entity name="Tests" representedClassName="DBTest" syncable="YES">
+        <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startDate" attributeType="Date" syncable="YES"/>
+        <relationship name="debugLogs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DebugLogs" inverseName="test" inverseEntity="DebugLogs" syncable="YES"/>
+        <relationship name="errors" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Errors" inverseName="test" inverseEntity="Errors" syncable="YES"/>
+        <relationship name="transfers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Transfers" inverseName="test" inverseEntity="Transfers" syncable="YES"/>
+    </entity>
+    <entity name="Transfers" representedClassName="DBTransfer" syncable="YES">
+        <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="horizontalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lastLocationUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitue" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="verticalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="test" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="transfers" inverseEntity="Tests" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Transfers" positionX="160" positionY="192" width="128" height="150"/>
+        <element name="Tests" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Errors" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="DebugLogs" positionX="160" positionY="192" width="128" height="90"/>
+    </elements>
+</model>
