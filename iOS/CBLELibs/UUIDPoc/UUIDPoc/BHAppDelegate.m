@@ -12,6 +12,7 @@
 #import "BHRootViewController.h"
 #import "BHCoreDataManager.h"
 #import "BHDashboardViewController.h"
+#import <jsonkit/NSObject+BitHiker.h>
 
 @implementation BHAppDelegate
 
@@ -23,6 +24,7 @@ static BHAppDelegate *_appDelegate;
     self.dashboardViewController = nil;
     [_window release];
     [_rootViewController release];
+    self.currentTest = nil;
     [super dealloc];
 }
 
@@ -37,6 +39,27 @@ static BHAppDelegate *_appDelegate;
     [self.rootViewController setToolbarHidden:NO];
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
+    
+    [[BHCoreDataManager sharedManager] getAllTestsWithCompleteBlock:^(NSArray *queryResults) {
+        if(queryResults.count == 0)
+        {
+            //we don't have a valid test... create a new one
+            [self createANewTestAndStart];
+        }
+        else
+        {
+            BHTest *lastTest = [queryResults lastObject];
+            if(lastTest.endDate)
+            {
+                //we don't have a valid test... create a new one
+                [self createANewTestAndStart];
+            }
+            else
+            {
+                [self startWithValidTest:lastTest];
+            }
+        }
+    } includeAllPropertyData:YES];
     
     return YES;
 }
@@ -66,6 +89,27 @@ static BHAppDelegate *_appDelegate;
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Start
+-(void)createANewTestAndStart
+{
+    [[BHCoreDataManager sharedManager] createANewTestWithCompleteBlock:^(NSArray *queryResults) {
+        BHTest *test = [queryResults lastObject];
+        [self startWithValidTest:test];
+    }];
+}
+
+-(void)startWithValidTest:(BHTest*)test
+{
+    if(test)
+    {
+        self.currentTest = test;
+    }
+    else
+    {
+        //error
+    }
 }
 
 @end

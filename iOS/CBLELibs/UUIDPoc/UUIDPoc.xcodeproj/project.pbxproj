@@ -33,7 +33,16 @@
 		61487B7216C2113100F47241 /* BHDashboardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B7116C2113100F47241 /* BHDashboardCollectionViewCell.m */; };
 		61487B7516C2116100F47241 /* BHDashboardCollectionViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B7416C2116100F47241 /* BHDashboardCollectionViewCellContentView.m */; };
 		61487B7716C2122800F47241 /* BHDashboardCollectionViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61487B7616C2122800F47241 /* BHDashboardCollectionViewCellContentView.xib */; };
-		61487B7A16C2295700F47241 /* NSObject+BitHiker.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B7916C2295700F47241 /* NSObject+BitHiker.m */; };
+		61A3FA7916D2BF0A00735DA2 /* libCBLEUUIDTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A3FA7816D2BF0A00735DA2 /* libCBLEUUIDTest.a */; };
+		61A3FA9316D2C0E800735DA2 /* DBTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA8C16D2C0E800735DA2 /* DBTest.m */; };
+		61A3FA9516D2C0E800735DA2 /* DBDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9016D2C0E800735DA2 /* DBDebugLog.m */; };
+		61A3FA9616D2C0E800735DA2 /* DBTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9216D2C0E800735DA2 /* DBTransfer.m */; };
+		61A3FA9916D2C15D00735DA2 /* BHTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9816D2C15D00735DA2 /* BHTest.m */; };
+		61A3FA9C16D2C3DC00735DA2 /* BHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9B16D2C3DC00735DA2 /* BHError.m */; };
+		61A3FA9F16D2C40800735DA2 /* DBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9E16D2C40800735DA2 /* DBError.m */; };
+		61A3FAA216D2C7EF00735DA2 /* BHDBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA116D2C7EF00735DA2 /* BHDBObject.m */; };
+		61A3FAA516D2C8DF00735DA2 /* BHTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA416D2C8DF00735DA2 /* BHTransfer.m */; };
+		61A3FAA816D2CA4E00735DA2 /* BHDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA716D2CA4E00735DA2 /* BHDebugLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,8 +83,25 @@
 		61487B7316C2116100F47241 /* BHDashboardCollectionViewCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHDashboardCollectionViewCellContentView.h; sourceTree = "<group>"; };
 		61487B7416C2116100F47241 /* BHDashboardCollectionViewCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHDashboardCollectionViewCellContentView.m; sourceTree = "<group>"; };
 		61487B7616C2122800F47241 /* BHDashboardCollectionViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BHDashboardCollectionViewCellContentView.xib; sourceTree = "<group>"; };
-		61487B7816C2295700F47241 /* NSObject+BitHiker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+BitHiker.h"; sourceTree = "<group>"; };
-		61487B7916C2295700F47241 /* NSObject+BitHiker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+BitHiker.m"; sourceTree = "<group>"; };
+		61A3FA7816D2BF0A00735DA2 /* libCBLEUUIDTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCBLEUUIDTest.a; path = "../CBLEUUIDTest/build/Release-iphoneos/libCBLEUUIDTest.a"; sourceTree = "<group>"; };
+		61A3FA8B16D2C0E800735DA2 /* DBTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTest.h; sourceTree = "<group>"; };
+		61A3FA8C16D2C0E800735DA2 /* DBTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTest.m; sourceTree = "<group>"; };
+		61A3FA8F16D2C0E800735DA2 /* DBDebugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDebugLog.h; sourceTree = "<group>"; };
+		61A3FA9016D2C0E800735DA2 /* DBDebugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDebugLog.m; sourceTree = "<group>"; };
+		61A3FA9116D2C0E800735DA2 /* DBTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTransfer.h; sourceTree = "<group>"; };
+		61A3FA9216D2C0E800735DA2 /* DBTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTransfer.m; sourceTree = "<group>"; };
+		61A3FA9716D2C15D00735DA2 /* BHTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHTest.h; sourceTree = "<group>"; };
+		61A3FA9816D2C15D00735DA2 /* BHTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHTest.m; sourceTree = "<group>"; };
+		61A3FA9A16D2C3DC00735DA2 /* BHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHError.h; sourceTree = "<group>"; };
+		61A3FA9B16D2C3DC00735DA2 /* BHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHError.m; sourceTree = "<group>"; };
+		61A3FA9D16D2C40800735DA2 /* DBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBError.h; sourceTree = "<group>"; };
+		61A3FA9E16D2C40800735DA2 /* DBError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBError.m; sourceTree = "<group>"; };
+		61A3FAA016D2C7EF00735DA2 /* BHDBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHDBObject.h; sourceTree = "<group>"; };
+		61A3FAA116D2C7EF00735DA2 /* BHDBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHDBObject.m; sourceTree = "<group>"; };
+		61A3FAA316D2C8DF00735DA2 /* BHTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHTransfer.h; sourceTree = "<group>"; };
+		61A3FAA416D2C8DF00735DA2 /* BHTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHTransfer.m; sourceTree = "<group>"; };
+		61A3FAA616D2CA4D00735DA2 /* BHDebugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHDebugLog.h; sourceTree = "<group>"; };
+		61A3FAA716D2CA4E00735DA2 /* BHDebugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHDebugLog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61A3FA7916D2BF0A00735DA2 /* libCBLEUUIDTest.a in Frameworks */,
 				61487B5116C1DCDA00F47241 /* CoreBluetooth.framework in Frameworks */,
 				61487B5216C1DCDA00F47241 /* CoreData.framework in Frameworks */,
 				61487B5316C1DCDA00F47241 /* CoreLocation.framework in Frameworks */,
@@ -119,6 +146,7 @@
 		61487B2616C1DC8600F47241 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61A3FA7816D2BF0A00735DA2 /* libCBLEUUIDTest.a */,
 				61487B4A16C1DCDA00F47241 /* CoreBluetooth.framework */,
 				61487B4B16C1DCDA00F47241 /* CoreData.framework */,
 				61487B4C16C1DCDA00F47241 /* CoreLocation.framework */,
@@ -191,8 +219,6 @@
 				61487B5F16C1DEC000F47241 /* BHCoreDataManager.m */,
 				61487B6116C1E01900F47241 /* BHUtils.h */,
 				61487B6216C1E01900F47241 /* BHUtils.m */,
-				61487B7816C2295700F47241 /* NSObject+BitHiker.h */,
-				61487B7916C2295700F47241 /* NSObject+BitHiker.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -200,6 +226,24 @@
 		61487B6416C1E2B200F47241 /* DB */ = {
 			isa = PBXGroup;
 			children = (
+				61A3FAA016D2C7EF00735DA2 /* BHDBObject.h */,
+				61A3FAA116D2C7EF00735DA2 /* BHDBObject.m */,
+				61A3FAA616D2CA4D00735DA2 /* BHDebugLog.h */,
+				61A3FAA716D2CA4E00735DA2 /* BHDebugLog.m */,
+				61A3FA9A16D2C3DC00735DA2 /* BHError.h */,
+				61A3FA9B16D2C3DC00735DA2 /* BHError.m */,
+				61A3FA9716D2C15D00735DA2 /* BHTest.h */,
+				61A3FA9816D2C15D00735DA2 /* BHTest.m */,
+				61A3FAA316D2C8DF00735DA2 /* BHTransfer.h */,
+				61A3FAA416D2C8DF00735DA2 /* BHTransfer.m */,
+				61A3FA8F16D2C0E800735DA2 /* DBDebugLog.h */,
+				61A3FA9016D2C0E800735DA2 /* DBDebugLog.m */,
+				61A3FA9D16D2C40800735DA2 /* DBError.h */,
+				61A3FA9E16D2C40800735DA2 /* DBError.m */,
+				61A3FA8B16D2C0E800735DA2 /* DBTest.h */,
+				61A3FA8C16D2C0E800735DA2 /* DBTest.m */,
+				61A3FA9116D2C0E800735DA2 /* DBTransfer.h */,
+				61A3FA9216D2C0E800735DA2 /* DBTransfer.m */,
 				61487B6516C1E2C300F47241 /* UUIDPoc.xcdatamodeld */,
 			);
 			name = DB;
@@ -294,7 +338,15 @@
 				61487B6A16C1E4B900F47241 /* BHDashboardViewController.m in Sources */,
 				61487B7216C2113100F47241 /* BHDashboardCollectionViewCell.m in Sources */,
 				61487B7516C2116100F47241 /* BHDashboardCollectionViewCellContentView.m in Sources */,
-				61487B7A16C2295700F47241 /* NSObject+BitHiker.m in Sources */,
+				61A3FA9316D2C0E800735DA2 /* DBTest.m in Sources */,
+				61A3FA9516D2C0E800735DA2 /* DBDebugLog.m in Sources */,
+				61A3FA9616D2C0E800735DA2 /* DBTransfer.m in Sources */,
+				61A3FA9916D2C15D00735DA2 /* BHTest.m in Sources */,
+				61A3FA9C16D2C3DC00735DA2 /* BHError.m in Sources */,
+				61A3FA9F16D2C40800735DA2 /* DBError.m in Sources */,
+				61A3FAA216D2C7EF00735DA2 /* BHDBObject.m in Sources */,
+				61A3FAA516D2C8DF00735DA2 /* BHTransfer.m in Sources */,
+				61A3FAA816D2CA4E00735DA2 /* BHDebugLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +418,7 @@
 				GCC_PREFIX_HEADER = "UUIDPoc/UUIDPoc-Prefix.pch";
 				INFOPLIST_FILE = "UUIDPoc/UUIDPoc-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -378,6 +431,7 @@
 				GCC_PREFIX_HEADER = "UUIDPoc/UUIDPoc-Prefix.pch";
 				INFOPLIST_FILE = "UUIDPoc/UUIDPoc-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -402,6 +456,7 @@
 				61487B4916C1DC8600F47241 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

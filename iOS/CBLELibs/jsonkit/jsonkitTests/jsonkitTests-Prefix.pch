@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'jsonkitTests' target in the 'jsonkitTests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif

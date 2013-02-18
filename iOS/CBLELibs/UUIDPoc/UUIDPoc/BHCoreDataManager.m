@@ -9,6 +9,14 @@
 #import "BHCoreDataManager.h"
 #import "BHUtils.h"
 #import <CoreData/CoreData.h>
+#import "DBTest.h"
+#import "DBError.h"
+#import "DBDebugLog.h"
+#import "DBTransfer.h"
+#import "BHTest.h"
+#import "BHDebugLog.h"
+#import "BHTransfer.h"
+#import "BHError.h"
 
 #pragma mark - BHCoreDataOperationWrapper
 /**
@@ -71,6 +79,10 @@
             [self.mContext reset];
         }
     }
+    self.CDWorkerBlock = nil;
+    self.mPersistentStoreCoordinator = nil;
+    self.mModel = nil;
+    self.mContext = nil;
 }
 
 @end
@@ -191,5 +203,90 @@ static BHCoreDataManager *_sharedManager;
         [self internalInit];
     }
     return self;
+}
+
+-(void)addOperationToCDQueueWithWorkerBlock:(void(^)(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator))workerBlock
+{
+    if(workerBlock)
+    {
+        BHCoreDataOperationWrapper *wrapper = [BHCoreDataOperationWrapper wrapperWithManagedObjectModel:self.cdManagedObjectModel persistentStoreCoordinator:self.cdPersistentStoreCoordinator andWorkerBlock:workerBlock];
+        [self.cdOperationQueue addOperation:wrapper];
+    }
+}
+
+#pragma mark - Tests
+-(void)getAllTestsWithCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock includeAllPropertyData:(BOOL)includeAllPropertyData
+{
+    if(completeBlock)
+    {
+        [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
+            
+            NSError *error = nil;
+            NSMutableArray *result = [NSMutableArray array];
+            
+            NSFetchRequest *testRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *testDescription = [NSEntityDescription entityForName:@"Tests" inManagedObjectContext:currentContext];
+            [testRequest setEntity:testDescription];
+            [testRequest setIncludesPendingChanges:YES];
+            [testRequest setIncludesPropertyValues:YES];
+            [testRequest setReturnsObjectsAsFaults:NO];
+            if(includeAllPropertyData)
+            {
+                [testRequest setRelationshipKeyPathsForPrefetching:@[@"errors",@"transfers",@"logs"]];
+            }
+            
+            NSArray *queryResults = [currentContext executeFetchRequest:testRequest error:&error];
+            [testRequest release];
+            for(DBTest *test in queryResults)
+            {
+                BHTest *mTest = [BHTest testWithDBTest:test andIncludeAllPropertData:includeAllPropertyData];
+                [result addObject:mTest];
+            }
+            [result sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"startDate" ascending:YES]]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completeBlock(result);
+            });
+        }];
+    }
+}
+-(void)createANewTestWithCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock
+{
+    [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
+        
+        NSError *error = nil;
+        NSMutableArray *result = [NSMutableArray array];
+        
+        //stop tests that don't have an end data
+        NSFetchRequest *testRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *testDescription = [NSEntityDescription entityForName:@"Tests" inManagedObjectContext:currentContext];
+        [testRequest setEntity:testDescription];
+        [testRequest setIncludesPendingChanges:YES];
+        [testRequest setIncludesPropertyValues:YES];
+        [testRequest setReturnsObjectsAsFaults:NO];
+        NSPredicate *where = [NSPredicate predicateWithFormat:@"endDate == nil"];
+        [testRequest setPredicate:where];
+        
+        NSArray *queryResults = [currentContext executeFetchRequest:testRequest error:&error];
+        [testRequest release];
+        for(DBTest *test in queryResults)
+        {
+            test.endDate = [NSDate date];
+        }
+        
+        //create the new test
+        DBTest *mNewTest = [NSEntityDescription insertNewObjectForEntityForName:@"Tests" inManagedObjectContext:currentContext];
+        mNewTest.startDate = [NSDate date];
+        BOOL success = [currentContext save:&error];
+        if(success)
+        {
+            BHTest *mTest = [BHTest testWithDBTest:mNewTest];//do this after the save so we get a valid managedObjectURI, and not the temp one
+            [result addObject:mTest];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completeBlock(result);
+        });
+    }];
 }
 @end

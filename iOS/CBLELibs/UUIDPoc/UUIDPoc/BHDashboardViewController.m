@@ -11,7 +11,7 @@
 #import "BHDashboardCollectionViewCellContentView.h"
 #import "BHDashboardCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
-#import "NSObject+BitHiker.h"
+#import <jsonkit/NSObject+BitHiker.h>
 
 @interface BHDashboardViewController ()
 {

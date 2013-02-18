@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:jsonkit/jsonkit.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:UUIDPoc/UUIDPoc.xcodeproj">
    </FileRef>
    <FileRef

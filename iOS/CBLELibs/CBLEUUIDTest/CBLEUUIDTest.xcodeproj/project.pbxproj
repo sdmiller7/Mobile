@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		616070CF16CB4AFA00B57050 /* libjsonkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 616070CE16CB4AFA00B57050 /* libjsonkit.a */; };
 		6163DCCE16B4723700AE6706 /* CBLEUUIDClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6163DCCD16B4723700AE6706 /* CBLEUUIDClient.m */; };
 		616D98CF16ACD270004F556F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 616D98CE16ACD270004F556F /* Foundation.framework */; };
 		616D98D416ACD270004F556F /* CBLEUUIDTest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 616D98D316ACD270004F556F /* CBLEUUIDTest.h */; };
@@ -36,6 +37,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		616070CE16CB4AFA00B57050 /* libjsonkit.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libjsonkit.a; path = "../jsonkit/build/Release-iphoneos/libjsonkit.a"; sourceTree = "<group>"; };
 		6163DCCC16B4723700AE6706 /* CBLEUUIDClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBLEUUIDClient.h; sourceTree = "<group>"; };
 		6163DCCD16B4723700AE6706 /* CBLEUUIDClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBLEUUIDClient.m; sourceTree = "<group>"; };
 		616D98CB16ACD270004F556F /* libCBLEUUIDTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCBLEUUIDTest.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				616070CF16CB4AFA00B57050 /* libjsonkit.a in Frameworks */,
 				618D8DC116AF841A003854A9 /* AddressBook.framework in Frameworks */,
 				61CAE30F16AE1BC700C719C7 /* UIKit.framework in Frameworks */,
 				616D98E716ACD2E1004F556F /* libCBLEBase.a in Frameworks */,
@@ -135,6 +138,7 @@
 		616D98E816ACD2E3004F556F /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				616070CE16CB4AFA00B57050 /* libjsonkit.a */,
 				616D98E616ACD2E1004F556F /* libCBLEBase.a */,
 			);
 			name = libs;

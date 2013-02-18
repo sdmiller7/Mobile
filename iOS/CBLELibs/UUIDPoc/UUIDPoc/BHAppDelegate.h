@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BHTest.h"
 
 @class BHRootViewController,BHDashboardViewController;
 
@@ -16,5 +17,6 @@
 
 @property (strong, nonatomic) BHRootViewController *rootViewController;
 @property (nonatomic, retain) BHDashboardViewController *dashboardViewController;
+@property (nonatomic, retain) BHTest *currentTest;
 
 @end

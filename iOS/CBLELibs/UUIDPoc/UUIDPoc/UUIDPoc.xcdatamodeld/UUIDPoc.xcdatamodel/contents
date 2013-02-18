@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G63" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1810" systemVersion="11G63b" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="DebugLogs" representedClassName="DBDebugLog" syncable="YES">
         <attribute name="date" attributeType="Date" syncable="YES"/>
         <attribute name="message" attributeType="String" syncable="YES"/>
         <relationship name="test" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="debugLogs" inverseEntity="Tests" syncable="YES"/>
     </entity>
-    <entity name="Errors" representedClassName="DBErrors" syncable="YES">
+    <entity name="Errors" representedClassName="DBError" syncable="YES">
         <attribute name="cause" attributeType="String" syncable="YES"/>
         <attribute name="date" attributeType="Date" syncable="YES"/>
         <relationship name="test" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="errors" inverseEntity="Tests" syncable="YES"/>
@@ -27,9 +27,9 @@
         <relationship name="test" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="transfers" inverseEntity="Tests" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Transfers" positionX="160" positionY="192" width="128" height="150"/>
-        <element name="Tests" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="Errors" positionX="160" positionY="192" width="128" height="90"/>
         <element name="DebugLogs" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Errors" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Tests" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Transfers" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>
