@@ -16,6 +16,7 @@
 #import "BHTransfer.h"
 #import <jsonkit/NSObject+BitHiker.h>
 
+
 @implementation BHTest
 +(BHTest*)testWithDBTest:(DBTest*)test
 {
@@ -82,8 +83,60 @@
     return self;
 }
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    BHTest *result = [[BHTest alloc] init];
+    
+    result.endDate = [[self.endDate copyWithZone:zone] autorelease];
+    result.startDate = [[self.startDate copyWithZone:zone] autorelease];
+    result.debugLogs = [[self.debugLogs copyWithZone:zone] autorelease];
+    result.transfers = [[self.transfers copyWithZone:zone] autorelease];
+    result.errors = [[self.errors copyWithZone:zone] autorelease];
+    result.debugLogs = [[self.debugLogs copyWithZone:zone] autorelease];
+    result.managedObjectURI = [[self.managedObjectURI copyWithZone:zone] autorelease];
+    
+    return result;
+}
+
 -(NSString*)description
 {
     return [NSString stringWithFormat:@"%@<%p>\n%@",NSStringFromClass(self.class),self,[self dictionaryRep]];
+}
+
+-(DBTest*)DBTestWithPersistentStore:(NSPersistentStoreCoordinator*)persistentStore andContext:(NSManagedObjectContext*)currentContext
+{
+    if(currentContext && persistentStore)
+    {
+        DBTest *test = nil;
+        
+        if(self.managedObjectURI)
+        {
+            NSManagedObjectID *objectID = [persistentStore managedObjectIDForURIRepresentation:self.managedObjectURI];
+            if(objectID)
+            {
+                NSError *error = nil;
+                NSFetchRequest *testRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *testDescription = [NSEntityDescription entityForName:@"Tests" inManagedObjectContext:currentContext];
+                [testRequest setEntity:testDescription];
+                [testRequest setIncludesPendingChanges:YES];
+                [testRequest setIncludesPropertyValues:YES];
+                [testRequest setReturnsObjectsAsFaults:NO];
+                [testRequest setFetchLimit:1];
+                NSPredicate *where = [NSPredicate predicateWithFormat:@"self IN %@",@[objectID]];
+                [testRequest setPredicate:where];
+                
+                test = [[currentContext executeFetchRequest:testRequest error:&error] lastObject];
+                [testRequest release];
+            }
+        }
+        
+        return test;
+    }
+    return nil;
+}
+
+-(void)saveToManagedObject:(NSManagedObject *)managedObject
+{
+    [self saveToManagedObject:managedObject withExclusionList:@[@"debugLogs",@"errors",@"transfers"]];
 }
 @end

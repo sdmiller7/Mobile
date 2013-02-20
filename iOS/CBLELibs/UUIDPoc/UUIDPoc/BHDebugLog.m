@@ -40,4 +40,21 @@
     }
     return self;
 }
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    BHDebugLog *result= [[BHDebugLog alloc] init];
+    
+    result.date = [[self.date copyWithZone:zone] autorelease];
+    result.message = [[self.message copyWithZone:zone] autorelease];
+    result.test = [[self.test copyWithZone:zone] autorelease];
+    result.managedObjectURI = [[self.managedObjectURI copyWithZone:zone] autorelease];
+    
+    return result;
+}
+
+-(void)saveToManagedObject:(NSManagedObject *)managedObject
+{
+    [self saveToManagedObject:managedObject withExclusionList:@[@"test"]];
+}
 @end

@@ -11,11 +11,13 @@
 @class BHTest,DBError;
 
 @interface BHError : BHDBObject
+<NSCopying>
 {
     
 }
 
 @property (nonatomic, retain) NSString * cause;
+@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) BHTest *test;
 
@@ -25,4 +27,6 @@
  Does not copy over the "test"
  */
 -(id)initWithDBError:(DBError*)error;
+
+-(void)saveToDBError:(DBError*)error;
 @end

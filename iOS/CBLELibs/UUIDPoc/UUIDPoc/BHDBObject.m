@@ -9,6 +9,7 @@
 #import "BHDBObject.h"
 #import <jsonkit/NSObject+BitHiker.h>
 
+
 @implementation BHDBObject
 -(void)dealloc
 {
@@ -16,5 +17,37 @@
     [super dealloc];
 }
 
+-(void)saveToManagedObject:(NSManagedObject*)managedObject
+{
+    [self saveToManagedObject:managedObject withExclusionList:nil];
+}
+
+-(void)saveToManagedObject:(NSManagedObject*)managedObject withExclusionList:(NSArray*)excludedPropertyNames
+{
+    if(managedObject)
+    {
+        NSArray *myPropNames = [self propertyNames];
+        NSArray *otherPropNames = [managedObject propertyNames];
+        
+        for(NSString *prop in myPropNames)
+        {
+            @try
+            {
+                if([otherPropNames containsObject:prop] && ![excludedPropertyNames containsObject:prop])
+                {
+                    if([[self valueForKey:prop] conformsToProtocol:@protocol(NSCopying)])
+                    {
+                        [managedObject setValue:[[[self valueForKey:prop] copy] autorelease] forKey:prop];
+                    }
+                    else
+                    {
+                        [managedObject setValue:[self valueForKey:prop] forKey:prop];
+                    }
+                }
+            }
+            @catch(NSException *ex){}
+        }
+    }
+}
 
 @end

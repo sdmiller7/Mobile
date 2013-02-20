@@ -47,4 +47,25 @@
     }
     return self;
 }
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    BHTransfer *result = [[BHTransfer alloc] init];
+    
+    result.date = [[self.date copyWithZone:zone] autorelease];
+    result.horizontalAccuracy = [[self.horizontalAccuracy copyWithZone:zone] autorelease];
+    result.lastLocationUpdate = [[self.lastLocationUpdate copyWithZone:zone] autorelease];
+    result.latitude = [[self.latitude copyWithZone:zone] autorelease];
+    result.longitue = [[self.longitue copyWithZone:zone] autorelease];
+    result.verticalAccuracy = [[self.verticalAccuracy copyWithZone:zone] autorelease];
+    result.test = [[self.test copyWithZone:zone] autorelease];
+    result.managedObjectURI = [[self.managedObjectURI copyWithZone:zone] autorelease];
+    
+    return result;
+}
+
+-(void)saveToManagedObject:(NSManagedObject *)managedObject
+{
+    [self saveToManagedObject:managedObject withExclusionList:@[@"test"]];
+}
 @end

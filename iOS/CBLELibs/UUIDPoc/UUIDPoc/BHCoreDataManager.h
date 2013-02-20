@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class BHError,BHTest,BHDebugLog,BHTransfer;
+
 typedef void(^BHCoreDataManagerBOOLResponseBlock)(BOOL success);
 typedef void(^BHCoreDataManagerArrayResponseBlock)(NSArray *queryResults);
 
@@ -18,7 +20,13 @@ typedef void(^BHCoreDataManagerArrayResponseBlock)(NSArray *queryResults);
 
 +(BHCoreDataManager*)sharedManager;
 
+#pragma mark - Errors
+-(void)logError:(BHError*)bhError forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock;
+
 #pragma mark - Tests
+
+-(void)getLastTestWithCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock;
+
 -(void)getAllTestsWithCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock includeAllPropertyData:(BOOL)includeAllPropertyData;
 
 -(void)createANewTestWithCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock;

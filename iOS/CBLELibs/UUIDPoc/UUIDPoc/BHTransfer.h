@@ -11,6 +11,7 @@
 @class BHTest, DBTransfer;
 
 @interface BHTransfer : BHDBObject
+<NSCopying>
 {
     
 }

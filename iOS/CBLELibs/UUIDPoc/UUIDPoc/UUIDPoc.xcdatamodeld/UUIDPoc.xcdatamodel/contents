@@ -8,6 +8,7 @@
     <entity name="Errors" representedClassName="DBError" syncable="YES">
         <attribute name="cause" attributeType="String" syncable="YES"/>
         <attribute name="date" attributeType="Date" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="test" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="errors" inverseEntity="Tests" syncable="YES"/>
     </entity>
     <entity name="Tests" representedClassName="DBTest" syncable="YES">
@@ -19,16 +20,16 @@
     </entity>
     <entity name="Transfers" representedClassName="DBTransfer" syncable="YES">
         <attribute name="date" attributeType="Date" syncable="YES"/>
-        <attribute name="horizontalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="horizontalAccuracy" optional="YES" attributeType="Double" defaultValueString="-1" syncable="YES"/>
         <attribute name="lastLocationUpdate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitue" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="verticalAccuracy" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="verticalAccuracy" optional="YES" attributeType="Double" defaultValueString="-1" syncable="YES"/>
         <relationship name="test" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tests" inverseName="transfers" inverseEntity="Tests" syncable="YES"/>
     </entity>
     <elements>
         <element name="DebugLogs" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Errors" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Errors" positionX="160" positionY="192" width="128" height="105"/>
         <element name="Tests" positionX="160" positionY="192" width="128" height="120"/>
         <element name="Transfers" positionX="160" positionY="192" width="128" height="150"/>
     </elements>

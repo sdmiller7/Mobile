@@ -8,6 +8,7 @@
 
 #import "DBError.h"
 #import "DBTest.h"
+#import <jsonkit/NSObject+BitHiker.h>
 
 
 @implementation DBError
@@ -15,5 +16,7 @@
 @dynamic cause;
 @dynamic date;
 @dynamic test;
+@dynamic title;
+
 
 @end

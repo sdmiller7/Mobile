@@ -43,6 +43,37 @@
 		61A3FAA216D2C7EF00735DA2 /* BHDBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA116D2C7EF00735DA2 /* BHDBObject.m */; };
 		61A3FAA516D2C8DF00735DA2 /* BHTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA416D2C8DF00735DA2 /* BHTransfer.m */; };
 		61A3FAA816D2CA4E00735DA2 /* BHDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA716D2CA4E00735DA2 /* BHDebugLog.m */; };
+		61C5D78216D45FB800D64CE0 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C5D78116D45FB800D64CE0 /* SenTestingKit.framework */; };
+		61C5D78316D45FB800D64CE0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B2716C1DC8600F47241 /* UIKit.framework */; };
+		61C5D78416D45FB800D64CE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B2916C1DC8600F47241 /* Foundation.framework */; };
+		61C5D78A16D45FB800D64CE0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 61C5D78816D45FB800D64CE0 /* InfoPlist.strings */; };
+		61C5D78D16D45FB800D64CE0 /* UUIDPocTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61C5D78C16D45FB800D64CE0 /* UUIDPocTests.m */; };
+		61C5D79316D45FF200D64CE0 /* BHDashboardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B7116C2113100F47241 /* BHDashboardCollectionViewCell.m */; };
+		61C5D79416D45FF200D64CE0 /* BHDashboardCollectionViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B7416C2116100F47241 /* BHDashboardCollectionViewCellContentView.m */; };
+		61C5D79516D45FF200D64CE0 /* BHDBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA116D2C7EF00735DA2 /* BHDBObject.m */; };
+		61C5D79616D45FF200D64CE0 /* BHDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA716D2CA4E00735DA2 /* BHDebugLog.m */; };
+		61C5D79716D45FF200D64CE0 /* BHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9B16D2C3DC00735DA2 /* BHError.m */; };
+		61C5D79816D45FF200D64CE0 /* BHTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9816D2C15D00735DA2 /* BHTest.m */; };
+		61C5D79916D45FF200D64CE0 /* BHTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FAA416D2C8DF00735DA2 /* BHTransfer.m */; };
+		61C5D79A16D45FF200D64CE0 /* DBDebugLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9016D2C0E800735DA2 /* DBDebugLog.m */; };
+		61C5D79B16D45FF200D64CE0 /* DBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9E16D2C40800735DA2 /* DBError.m */; };
+		61C5D79C16D45FF200D64CE0 /* DBTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA8C16D2C0E800735DA2 /* DBTest.m */; };
+		61C5D79D16D45FF200D64CE0 /* DBTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3FA9216D2C0E800735DA2 /* DBTransfer.m */; };
+		61C5D79E16D45FF200D64CE0 /* BHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B3716C1DC8600F47241 /* BHAppDelegate.m */; };
+		61C5D79F16D45FF200D64CE0 /* BHCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B5F16C1DEC000F47241 /* BHCoreDataManager.m */; };
+		61C5D7A016D45FF200D64CE0 /* BHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B6216C1E01900F47241 /* BHUtils.m */; };
+		61C5D7A116D45FF200D64CE0 /* BHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B4016C1DC8600F47241 /* BHViewController.m */; };
+		61C5D7A216D45FF200D64CE0 /* BHRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B5C16C1DD7300F47241 /* BHRootViewController.m */; };
+		61C5D7A316D45FF200D64CE0 /* BHDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61487B6916C1E4B900F47241 /* BHDashboardViewController.m */; };
+		61C5D7A416D4603800D64CE0 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B4A16C1DCDA00F47241 /* CoreBluetooth.framework */; };
+		61C5D7A516D4603800D64CE0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B4B16C1DCDA00F47241 /* CoreData.framework */; };
+		61C5D7A616D4603800D64CE0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B4C16C1DCDA00F47241 /* CoreLocation.framework */; };
+		61C5D7A716D4603800D64CE0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B4D16C1DCDA00F47241 /* MobileCoreServices.framework */; };
+		61C5D7A816D4603800D64CE0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B4E16C1DCDA00F47241 /* QuartzCore.framework */; };
+		61C5D7A916D4603800D64CE0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B4F16C1DCDA00F47241 /* Security.framework */; };
+		61C5D7AA16D4603800D64CE0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B5016C1DCDA00F47241 /* SystemConfiguration.framework */; };
+		61C5D7AC16D4603800D64CE0 /* libCBLEUUIDTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C5D7AB16D4603800D64CE0 /* libCBLEUUIDTest.a */; };
+		61C5D7AD16D4621400D64CE0 /* UUIDPoc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61487B6516C1E2C300F47241 /* UUIDPoc.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +133,14 @@
 		61A3FAA416D2C8DF00735DA2 /* BHTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHTransfer.m; sourceTree = "<group>"; };
 		61A3FAA616D2CA4D00735DA2 /* BHDebugLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHDebugLog.h; sourceTree = "<group>"; };
 		61A3FAA716D2CA4E00735DA2 /* BHDebugLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHDebugLog.m; sourceTree = "<group>"; };
+		61C5D78016D45FB800D64CE0 /* UUIDPocTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UUIDPocTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		61C5D78116D45FB800D64CE0 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		61C5D78716D45FB800D64CE0 /* UUIDPocTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UUIDPocTests-Info.plist"; sourceTree = "<group>"; };
+		61C5D78916D45FB800D64CE0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		61C5D78B16D45FB800D64CE0 /* UUIDPocTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UUIDPocTests.h; sourceTree = "<group>"; };
+		61C5D78C16D45FB800D64CE0 /* UUIDPocTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UUIDPocTests.m; sourceTree = "<group>"; };
+		61C5D78E16D45FB800D64CE0 /* UUIDPocTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UUIDPocTests-Prefix.pch"; sourceTree = "<group>"; };
+		61C5D7AB16D4603800D64CE0 /* libCBLEUUIDTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCBLEUUIDTest.a; path = "../../CBLEUUIDTest/build/Release-iphoneos/libCBLEUUIDTest.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +162,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		61C5D77C16D45FB800D64CE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61C5D7AC16D4603800D64CE0 /* libCBLEUUIDTest.a in Frameworks */,
+				61C5D7A416D4603800D64CE0 /* CoreBluetooth.framework in Frameworks */,
+				61C5D7A516D4603800D64CE0 /* CoreData.framework in Frameworks */,
+				61C5D7A616D4603800D64CE0 /* CoreLocation.framework in Frameworks */,
+				61C5D7A716D4603800D64CE0 /* MobileCoreServices.framework in Frameworks */,
+				61C5D7A816D4603800D64CE0 /* QuartzCore.framework in Frameworks */,
+				61C5D7A916D4603800D64CE0 /* Security.framework in Frameworks */,
+				61C5D7AA16D4603800D64CE0 /* SystemConfiguration.framework in Frameworks */,
+				61C5D78216D45FB800D64CE0 /* SenTestingKit.framework in Frameworks */,
+				61C5D78316D45FB800D64CE0 /* UIKit.framework in Frameworks */,
+				61C5D78416D45FB800D64CE0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -130,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				61487B2D16C1DC8600F47241 /* UUIDPoc */,
+				61C5D78516D45FB800D64CE0 /* UUIDPocTests */,
 				61487B2616C1DC8600F47241 /* Frameworks */,
 				61487B2416C1DC8600F47241 /* Products */,
 			);
@@ -139,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				61487B2316C1DC8600F47241 /* UUIDPoc.app */,
+				61C5D78016D45FB800D64CE0 /* UUIDPocTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -157,6 +216,7 @@
 				61487B2716C1DC8600F47241 /* UIKit.framework */,
 				61487B2916C1DC8600F47241 /* Foundation.framework */,
 				61487B2B16C1DC8600F47241 /* CoreGraphics.framework */,
+				61C5D78116D45FB800D64CE0 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -260,6 +320,27 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		61C5D78516D45FB800D64CE0 /* UUIDPocTests */ = {
+			isa = PBXGroup;
+			children = (
+				61C5D7AB16D4603800D64CE0 /* libCBLEUUIDTest.a */,
+				61C5D78B16D45FB800D64CE0 /* UUIDPocTests.h */,
+				61C5D78C16D45FB800D64CE0 /* UUIDPocTests.m */,
+				61C5D78616D45FB800D64CE0 /* Supporting Files */,
+			);
+			path = UUIDPocTests;
+			sourceTree = "<group>";
+		};
+		61C5D78616D45FB800D64CE0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				61C5D78716D45FB800D64CE0 /* UUIDPocTests-Info.plist */,
+				61C5D78816D45FB800D64CE0 /* InfoPlist.strings */,
+				61C5D78E16D45FB800D64CE0 /* UUIDPocTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -279,6 +360,24 @@
 			productName = UUIDPoc;
 			productReference = 61487B2316C1DC8600F47241 /* UUIDPoc.app */;
 			productType = "com.apple.product-type.application";
+		};
+		61C5D77F16D45FB800D64CE0 /* UUIDPocTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61C5D79116D45FB800D64CE0 /* Build configuration list for PBXNativeTarget "UUIDPocTests" */;
+			buildPhases = (
+				61C5D77B16D45FB800D64CE0 /* Sources */,
+				61C5D77C16D45FB800D64CE0 /* Frameworks */,
+				61C5D77D16D45FB800D64CE0 /* Resources */,
+				61C5D77E16D45FB800D64CE0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UUIDPocTests;
+			productName = UUIDPocTests;
+			productReference = 61C5D78016D45FB800D64CE0 /* UUIDPocTests.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -303,6 +402,7 @@
 			projectRoot = "";
 			targets = (
 				61487B2216C1DC8600F47241 /* UUIDPoc */,
+				61C5D77F16D45FB800D64CE0 /* UUIDPocTests */,
 			);
 		};
 /* End PBXProject section */
@@ -321,7 +421,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		61C5D77D16D45FB800D64CE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61C5D78A16D45FB800D64CE0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		61C5D77E16D45FB800D64CE0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		61487B1F16C1DC8600F47241 /* Sources */ = {
@@ -350,6 +474,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		61C5D77B16D45FB800D64CE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61C5D7AD16D4621400D64CE0 /* UUIDPoc.xcdatamodeld in Sources */,
+				61C5D79316D45FF200D64CE0 /* BHDashboardCollectionViewCell.m in Sources */,
+				61C5D79416D45FF200D64CE0 /* BHDashboardCollectionViewCellContentView.m in Sources */,
+				61C5D79516D45FF200D64CE0 /* BHDBObject.m in Sources */,
+				61C5D79616D45FF200D64CE0 /* BHDebugLog.m in Sources */,
+				61C5D79716D45FF200D64CE0 /* BHError.m in Sources */,
+				61C5D79816D45FF200D64CE0 /* BHTest.m in Sources */,
+				61C5D79916D45FF200D64CE0 /* BHTransfer.m in Sources */,
+				61C5D79A16D45FF200D64CE0 /* DBDebugLog.m in Sources */,
+				61C5D79B16D45FF200D64CE0 /* DBError.m in Sources */,
+				61C5D79C16D45FF200D64CE0 /* DBTest.m in Sources */,
+				61C5D79D16D45FF200D64CE0 /* DBTransfer.m in Sources */,
+				61C5D79E16D45FF200D64CE0 /* BHAppDelegate.m in Sources */,
+				61C5D79F16D45FF200D64CE0 /* BHCoreDataManager.m in Sources */,
+				61C5D7A016D45FF200D64CE0 /* BHUtils.m in Sources */,
+				61C5D7A116D45FF200D64CE0 /* BHViewController.m in Sources */,
+				61C5D7A216D45FF200D64CE0 /* BHRootViewController.m in Sources */,
+				61C5D7A316D45FF200D64CE0 /* BHDashboardViewController.m in Sources */,
+				61C5D78D16D45FB800D64CE0 /* UUIDPocTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -357,6 +507,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				61487B3116C1DC8600F47241 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		61C5D78816D45FB800D64CE0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				61C5D78916D45FB800D64CE0 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -437,6 +595,36 @@
 			};
 			name = Release;
 		};
+		61C5D78F16D45FB800D64CE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UUIDPocTests/UUIDPocTests-Prefix.pch";
+				INFOPLIST_FILE = "UUIDPocTests/UUIDPocTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		61C5D79016D45FB800D64CE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UUIDPocTests/UUIDPocTests-Prefix.pch";
+				INFOPLIST_FILE = "UUIDPocTests/UUIDPocTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -457,6 +645,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		61C5D79116D45FB800D64CE0 /* Build configuration list for PBXNativeTarget "UUIDPocTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61C5D78F16D45FB800D64CE0 /* Debug */,
+				61C5D79016D45FB800D64CE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

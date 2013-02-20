@@ -11,6 +11,7 @@
 @class DBDebugLog,BHTest;
 
 @interface BHDebugLog : BHDBObject
+<NSCopying>
 {
     
 }

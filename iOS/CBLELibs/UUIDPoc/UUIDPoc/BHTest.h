@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "BHDBObject.h"
+#import <CoreData/CoreData.h>
 
 @class DBTest;
 
 @interface BHTest : BHDBObject
+<NSCopying>
 {
     
 }
@@ -24,6 +26,8 @@
 
 +(BHTest*)testWithDBTest:(DBTest*)test;
 +(BHTest*)testWithDBTest:(DBTest*)test andIncludeAllPropertData:(BOOL)includeAllPropertyData;
+
 -(id)initWithDBTest:(DBTest*)test andIncludeAllPropertData:(BOOL)includeAllPropertyData;
 
+-(DBTest*)DBTestWithPersistentStore:(NSPersistentStoreCoordinator*)persistentStore andContext:(NSManagedObjectContext*)currentContext;
 @end

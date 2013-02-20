@@ -22,6 +22,7 @@
 {
     self.cause = nil;
     self.date = nil;
+    self.title = nil;
     self.test = nil;
     [super dealloc];
 }
@@ -35,9 +36,28 @@
         {
             self.cause = [[error.cause copy] autorelease];
             self.date = [[error.date copy] autorelease];
+            self.title = [[error.title copy] autorelease];
             self.managedObjectURI = [[error objectID] URIRepresentation];
         }
     }
     return self;
+}
+
+-(id)copyWithZone:(NSZone *)zone
+{
+    BHError *result = [[BHError alloc] init];
+    
+    result.cause = [[self.cause copyWithZone:zone] autorelease];
+    result.date = [[self.date copyWithZone:zone] autorelease];
+    result.test = [[self.test copyWithZone:zone] autorelease];
+    result.title = [[self.title copyWithZone:zone] autorelease];
+    result.managedObjectURI = [[self.managedObjectURI copyWithZone:zone] autorelease];
+    
+    return result;
+}
+
+-(void)saveToManagedObject:(NSManagedObject *)managedObject
+{
+    [self saveToManagedObject:managedObject withExclusionList:@[@"test"]];
 }
 @end

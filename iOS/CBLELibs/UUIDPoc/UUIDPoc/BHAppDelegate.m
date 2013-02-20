@@ -13,6 +13,10 @@
 #import "BHCoreDataManager.h"
 #import "BHDashboardViewController.h"
 #import <jsonkit/NSObject+BitHiker.h>
+#import "BHError.h"
+#import "BHDebugLog.h"
+#import "BHTest.h"
+#import "BHTransfer.h"
 
 @implementation BHAppDelegate
 
@@ -40,7 +44,7 @@ static BHAppDelegate *_appDelegate;
     self.window.rootViewController = self.rootViewController;
     [self.window makeKeyAndVisible];
     
-    [[BHCoreDataManager sharedManager] getAllTestsWithCompleteBlock:^(NSArray *queryResults) {
+    [[BHCoreDataManager sharedManager] getLastTestWithCompleteBlock:^(NSArray *queryResults) {
         if(queryResults.count == 0)
         {
             //we don't have a valid test... create a new one
@@ -49,17 +53,9 @@ static BHAppDelegate *_appDelegate;
         else
         {
             BHTest *lastTest = [queryResults lastObject];
-            if(lastTest.endDate)
-            {
-                //we don't have a valid test... create a new one
-                [self createANewTestAndStart];
-            }
-            else
-            {
-                [self startWithValidTest:lastTest];
-            }
+            [self startWithValidTest:lastTest];
         }
-    } includeAllPropertyData:YES];
+    }];
     
     return YES;
 }
@@ -105,6 +101,15 @@ static BHAppDelegate *_appDelegate;
     if(test)
     {
         self.currentTest = test;
+        for(int i =0;i<60;i++)
+        {
+            BHError *error = [BHError errorWithDBError:nil];
+            error.cause = @"testing";
+            error.title = [NSString stringWithFormat:@"title%i",i];
+            error.date = [NSDate date];
+            
+            [[BHCoreDataManager sharedManager] logError:error forTest:self.currentTest withCompleteBlock:NULL];
+        }
     }
     else
     {

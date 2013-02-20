@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class DBDebugLog, DBErrors, DBTransfer;
+@class DBDebugLog, DBError, DBTransfer;
 
 @interface DBTest : NSManagedObject
 
@@ -27,8 +27,8 @@
 - (void)addDebugLogs:(NSSet *)values;
 - (void)removeDebugLogs:(NSSet *)values;
 
-- (void)addErrorsObject:(DBErrors *)value;
-- (void)removeErrorsObject:(DBErrors *)value;
+- (void)addErrorsObject:(DBError *)value;
+- (void)removeErrorsObject:(DBError *)value;
 - (void)addErrors:(NSSet *)values;
 - (void)removeErrors:(NSSet *)values;
 
