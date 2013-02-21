@@ -20,7 +20,7 @@
 
 #pragma mark - BHCoreDataOperationWrapper
 /**
- Wrapper... prevents having to rewrite te same code multiple times over
+ Wrapper... prevents having to rewrite the same code multiple times over
  */
 @interface BHCoreDataOperationWrapper : NSOperation
 {
@@ -214,10 +214,10 @@ static BHCoreDataManager *_sharedManager;
     }
 }
 
-#pragma mark - Errors
--(void)logError:(BHError*)bhError forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock
+#pragma mark - Transfers
+-(void)saveTransfer:(BHTransfer*)bhTransfer forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock
 {
-    if(bhTest.managedObjectURI && bhError)
+    if(bhTest.managedObjectURI && bhTransfer)
     {
         [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
             
@@ -226,10 +226,213 @@ static BHCoreDataManager *_sharedManager;
             BOOL success = YES;
             if(test)
             {
-                DBError *dbError = [NSEntityDescription insertNewObjectForEntityForName:@"Errors" inManagedObjectContext:currentContext];
-                [test addErrorsObject:dbError];
-                dbError.test = test;
-                [bhError saveToManagedObject:dbError];
+                DBTransfer *dbTransfer = [NSEntityDescription insertNewObjectForEntityForName:@"Transfers" inManagedObjectContext:currentContext];
+                [test addTransfersObject:dbTransfer];
+                dbTransfer.test = test;
+                [bhTransfer saveToManagedObject:dbTransfer];
+                
+                success = [currentContext save:&error];
+            }
+            else
+            {
+                success &= NO;
+            }
+            
+            if(completeBlock)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completeBlock(success);
+                });
+            }
+        }];
+    }
+}
+
+-(void)getAllTransfersForTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock
+{
+    if(completeBlock)
+    {
+        [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
+            
+            NSError *error = nil;
+            NSMutableArray *result = [NSMutableArray array];
+            NSManagedObjectID *testID = [bhTest managedObjectIDWithPersistentStoreCoordinator:persistentStoreCoordinator];
+            
+            if(testID)
+            {
+                NSFetchRequest *transfersRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *logDescription = [NSEntityDescription entityForName:@"Transfers" inManagedObjectContext:currentContext];
+                [transfersRequest setEntity:logDescription];
+                [transfersRequest setIncludesPendingChanges:YES];
+                [transfersRequest setIncludesPropertyValues:YES];
+                [transfersRequest setReturnsObjectsAsFaults:NO];
+                NSPredicate *where = [NSPredicate predicateWithFormat:@"test == %@",testID];
+                [transfersRequest setPredicate:where];
+                [transfersRequest setFetchBatchSize:100];
+                
+                NSArray *queryResults = [currentContext executeFetchRequest:transfersRequest error:&error];
+                [transfersRequest release];
+                for(DBTransfer *transfer in queryResults)
+                {
+                    BHTransfer *mtransfer = [BHTransfer transferWithDBTransfer:transfer];
+                    mtransfer.test = bhTest;
+                    mtransfer.testManagedObjectURI = bhTest.managedObjectURI;
+                    [result addObject:mtransfer];
+                }
+                [result sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completeBlock(result);
+            });
+        }];
+    }
+}
+
+#pragma mark - Debug
+-(void)getAllDebugLogsForTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock
+{
+    if(completeBlock)
+    {
+        [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
+            
+            NSError *error = nil;
+            NSMutableArray *result = [NSMutableArray array];
+            NSManagedObjectID *testID = [bhTest managedObjectIDWithPersistentStoreCoordinator:persistentStoreCoordinator];
+            
+            if(testID)
+            {
+                NSFetchRequest *logRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *logDescription = [NSEntityDescription entityForName:@"DebugLogs" inManagedObjectContext:currentContext];
+                [logRequest setEntity:logDescription];
+                [logRequest setIncludesPendingChanges:YES];
+                [logRequest setIncludesPropertyValues:YES];
+                [logRequest setReturnsObjectsAsFaults:NO];
+                NSPredicate *where = [NSPredicate predicateWithFormat:@"test == %@",testID];
+                [logRequest setPredicate:where];
+                [logRequest setFetchBatchSize:100];
+                
+                NSArray *queryResults = [currentContext executeFetchRequest:logRequest error:&error];
+                [logRequest release];
+                for(DBDebugLog *log in queryResults)
+                {
+                    BHDebugLog *mLog = [BHDebugLog debugLogWithDBDebugLog:log];
+                    mLog.test = bhTest;
+                    mLog.testManagedObjectURI = bhTest.managedObjectURI;
+                    [result addObject:mLog];
+                }
+                [result sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completeBlock(result);
+            });
+        }];
+    }
+}
+
+-(void)logDebug:(BHDebugLog*)bhLog forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock
+{
+    if(bhTest.managedObjectURI && bhLog)
+    {
+        [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
+            
+            NSError *error = nil;
+            DBTest *test = [bhTest DBTestWithPersistentStore:persistentStoreCoordinator andContext:currentContext];
+            BOOL success = YES;
+            if(test)
+            {
+                DBDebugLog *dbLog = [NSEntityDescription insertNewObjectForEntityForName:@"DebugLogs" inManagedObjectContext:currentContext];
+                [test addDebugLogsObject:dbLog];
+                dbLog.test = test;
+                [bhLog saveToManagedObject:dbLog];
+                
+                success = [currentContext save:&error];
+            }
+            else
+            {
+                success &= NO;
+            }
+            
+            if(completeBlock)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completeBlock(success);
+                });
+            }
+        }];
+    }
+}
+
+#pragma mark - Errors
+-(void)getAllErrorsForTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock
+{
+    if(completeBlock)
+    {
+        [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
+            
+            NSError *error = nil;
+            NSMutableArray *result = [NSMutableArray array];
+            NSManagedObjectID *testID = [bhTest managedObjectIDWithPersistentStoreCoordinator:persistentStoreCoordinator];
+            
+            if(testID)
+            {
+                NSFetchRequest *logRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *logDescription = [NSEntityDescription entityForName:@"Errors" inManagedObjectContext:currentContext];
+                [logRequest setEntity:logDescription];
+                [logRequest setIncludesPendingChanges:YES];
+                [logRequest setIncludesPropertyValues:YES];
+                [logRequest setReturnsObjectsAsFaults:NO];
+                NSPredicate *where = [NSPredicate predicateWithFormat:@"test == %@",testID];
+                [logRequest setPredicate:where];
+                [logRequest setFetchBatchSize:100];
+                
+                NSArray *queryResults = [currentContext executeFetchRequest:logRequest error:&error];
+                [logRequest release];
+                for(DBError *log in queryResults)
+                {
+                    BHError *mLog = [BHError errorWithDBError:log];
+                    mLog.test = bhTest;
+                    mLog.testManagedObjectURI = bhTest.managedObjectURI;
+                    [result addObject:mLog];
+                }
+                [result sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]]];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completeBlock(result);
+            });
+        }];
+    }
+}
+
+-(void)logError:(BHError*)bhError forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock
+{
+    [self logErrors:@[bhError] forTest:bhTest withCompleteBlock:completeBlock];
+}
+
+-(void)logErrors:(NSArray*)bhErrors forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock
+{
+    if(bhTest.managedObjectURI && bhErrors.count>0)
+    {
+        [self addOperationToCDQueueWithWorkerBlock:^(NSManagedObjectModel *model, NSManagedObjectContext *currentContext, NSPersistentStoreCoordinator *persistentStoreCoordinator) {
+            
+            NSError *error = nil;
+            DBTest *test = [bhTest DBTestWithPersistentStore:persistentStoreCoordinator andContext:currentContext];
+            BOOL success = YES;
+            if(test)
+            {
+                DBError *dbError = nil;
+                BHError *bhError = nil;
+                for(NSUInteger i = 0; i<bhErrors.count; i++)
+                {
+                    dbError = [NSEntityDescription insertNewObjectForEntityForName:@"Errors" inManagedObjectContext:currentContext];
+                    [test addErrorsObject:dbError];
+                    dbError.test = test;
+                    
+                    bhError = (BHError*)[bhErrors objectAtIndex:i];
+                    [bhError saveToManagedObject:dbError];
+                }
                 
                 success = [currentContext save:&error];
             }

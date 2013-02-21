@@ -37,12 +37,4 @@
 }
 
 
--(void)testCreateTest
-{
-    [[BHCoreDataManager sharedManager] createANewTestWithCompleteBlock:^(NSArray *queryResults) {
-        NSURL *testObjectURI = [(BHTest*)[queryResults lastObject] managedObjectURI];
-        NSAssert(testObjectURI,@"test does not have a URI");
-    }];
-}
-
 @end

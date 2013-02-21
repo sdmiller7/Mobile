@@ -14,6 +14,7 @@
 -(void)dealloc
 {
     self.managedObjectURI = nil;
+    self.testManagedObjectURI = nil;
     [super dealloc];
 }
 
@@ -28,12 +29,17 @@
     {
         NSArray *myPropNames = [self propertyNames];
         NSArray *otherPropNames = [managedObject propertyNames];
+        NSMutableArray *excluded = [NSMutableArray arrayWithObjects:@"managedObjectURI",@"testManagedObjectURI", nil];
+        if(excludedPropertyNames.count>0)
+        {
+            [excluded addObjectsFromArray:excludedPropertyNames];
+        }
         
         for(NSString *prop in myPropNames)
         {
             @try
             {
-                if([otherPropNames containsObject:prop] && ![excludedPropertyNames containsObject:prop])
+                if([otherPropNames containsObject:prop] && ![excluded containsObject:prop])
                 {
                     if([[self valueForKey:prop] conformsToProtocol:@protocol(NSCopying)])
                     {

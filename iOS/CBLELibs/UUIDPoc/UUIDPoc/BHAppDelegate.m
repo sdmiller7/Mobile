@@ -22,6 +22,11 @@
 
 static BHAppDelegate *_appDelegate;
 
++(BHAppDelegate*)sharedAppDelegate
+{
+    return _appDelegate;
+}
+
 - (void)dealloc
 {
     _appDelegate = nil;
@@ -34,7 +39,10 @@ static BHAppDelegate *_appDelegate;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    _appDelegate = self;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _appDelegate = self;
+    });
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     
     self.dashboardViewController = [[[BHDashboardViewController alloc] init] autorelease];
@@ -87,6 +95,22 @@ static BHAppDelegate *_appDelegate;
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - FOR TESTING
+-(void)addErrors:(NSUInteger)count toTest:(BHTest*)test
+{
+    NSMutableArray *errors = [NSMutableArray arrayWithCapacity:count];
+    BHError *error = nil;
+    for(NSUInteger i =0;i<count;i++)
+    {
+        error = [BHError errorWithDBError:nil];
+        error.cause = @"testing";
+        error.title = [NSString stringWithFormat:@"title%i",i];
+        error.date = [NSDate date];
+        [errors addObject:error];
+    }
+    [[BHCoreDataManager sharedManager] logErrors:errors forTest:test withCompleteBlock:NULL];
+}
+
 #pragma mark - Start
 -(void)createANewTestAndStart
 {
@@ -101,15 +125,8 @@ static BHAppDelegate *_appDelegate;
     if(test)
     {
         self.currentTest = test;
-        for(int i =0;i<60;i++)
-        {
-            BHError *error = [BHError errorWithDBError:nil];
-            error.cause = @"testing";
-            error.title = [NSString stringWithFormat:@"title%i",i];
-            error.date = [NSDate date];
-            
-            [[BHCoreDataManager sharedManager] logError:error forTest:self.currentTest withCompleteBlock:NULL];
-        }
+        //FOR TESTING
+        //[self addErrors:60 toTest:self.currentTest];
     }
     else
     {

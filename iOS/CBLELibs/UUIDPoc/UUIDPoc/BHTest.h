@@ -29,5 +29,8 @@
 
 -(id)initWithDBTest:(DBTest*)test andIncludeAllPropertData:(BOOL)includeAllPropertyData;
 
+#pragma mark Core Data Helper Methods
 -(DBTest*)DBTestWithPersistentStore:(NSPersistentStoreCoordinator*)persistentStore andContext:(NSManagedObjectContext*)currentContext;
+
+-(NSManagedObjectID*)managedObjectIDWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)persistentStoreCoordinator;
 @end

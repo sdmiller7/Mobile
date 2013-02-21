@@ -13,5 +13,6 @@
     
 }
 
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *loadingThrobber;
 
 @end

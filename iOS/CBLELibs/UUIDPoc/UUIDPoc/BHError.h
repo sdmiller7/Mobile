@@ -27,6 +27,4 @@
  Does not copy over the "test"
  */
 -(id)initWithDBError:(DBError*)error;
-
--(void)saveToDBError:(DBError*)error;
 @end

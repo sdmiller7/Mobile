@@ -15,6 +15,7 @@
 }
 
 @property (nonatomic, retain) NSURL *managedObjectURI;
+@property (nonatomic, retain) NSURL *testManagedObjectURI;
 
 -(void)saveToManagedObject:(NSManagedObject*)managedObject;
 -(void)saveToManagedObject:(NSManagedObject*)managedObject withExclusionList:(NSArray*)excludedPropertyNames;

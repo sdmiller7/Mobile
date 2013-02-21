@@ -13,11 +13,16 @@
 @end
 
 @implementation BHViewController
+-(void)dealloc
+{
+    self.loadingThrobber = nil;
+    [super dealloc];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.backBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:nil action:nil] autorelease];//back button that appears on the view pushed by the view controller... so, you need this in the previous view controller.
 }
 
 - (void)didReceiveMemoryWarning

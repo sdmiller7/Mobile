@@ -12,6 +12,7 @@
 #import "BHDashboardCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 #import <jsonkit/NSObject+BitHiker.h>
+#import "BHErrorLogsViewController.h"
 
 @interface BHDashboardViewController ()
 {
@@ -34,6 +35,7 @@
     self.items = [NSMutableArray array];
     [self.items addObject:@"Log"];
     [self.items addObject:@"Current Stats"];
+    [self.items addObject:@"Errors"];
 }
 - (id)init
 {
@@ -85,6 +87,19 @@
 }
 
 #pragma mark - UICollectionViewControllerDelegate/DataSource Methods
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *option = ((NSString*)[self.items objectAtIndex:indexPath.row]).lowercaseString;
+    
+    if([option isEqualToString:@"errors"])
+    {
+        BHErrorLogsViewController *controller = [[BHErrorLogsViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+        [controller release];
+    }
+    
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+}
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -117,7 +132,7 @@
     }
     
     cell.contentSubview.titleLabel.text = [self.items objectAtIndex:indexPath.row];
-    
+    cell.tag = indexPath.row;
     return cell;
 }
 

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		612FFECD16D5D9AE003F003C /* BHErrorLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FFECC16D5D9AE003F003C /* BHErrorLogsViewController.m */; };
+		612FFECE16D5D9AE003F003C /* BHErrorLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FFECC16D5D9AE003F003C /* BHErrorLogsViewController.m */; };
+		612FFED116D5DB34003F003C /* BHErrorLogTableViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FFED016D5DB34003F003C /* BHErrorLogTableViewCellContentView.m */; };
+		612FFED216D5DB34003F003C /* BHErrorLogTableViewCellContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FFED016D5DB34003F003C /* BHErrorLogTableViewCellContentView.m */; };
+		612FFED416D5DCF6003F003C /* BHErrorLogTableViewCellContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612FFED316D5DCF6003F003C /* BHErrorLogTableViewCellContentView.xib */; };
+		612FFED616D5E307003F003C /* BHErrorLogsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 612FFED516D5E307003F003C /* BHErrorLogsViewController.xib */; };
 		61487B2816C1DC8600F47241 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B2716C1DC8600F47241 /* UIKit.framework */; };
 		61487B2A16C1DC8600F47241 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B2916C1DC8600F47241 /* Foundation.framework */; };
 		61487B2C16C1DC8600F47241 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61487B2B16C1DC8600F47241 /* CoreGraphics.framework */; };
@@ -77,6 +83,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		612FFECB16D5D9AE003F003C /* BHErrorLogsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHErrorLogsViewController.h; sourceTree = "<group>"; };
+		612FFECC16D5D9AE003F003C /* BHErrorLogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHErrorLogsViewController.m; sourceTree = "<group>"; };
+		612FFECF16D5DB34003F003C /* BHErrorLogTableViewCellContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHErrorLogTableViewCellContentView.h; sourceTree = "<group>"; };
+		612FFED016D5DB34003F003C /* BHErrorLogTableViewCellContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BHErrorLogTableViewCellContentView.m; sourceTree = "<group>"; };
+		612FFED316D5DCF6003F003C /* BHErrorLogTableViewCellContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BHErrorLogTableViewCellContentView.xib; sourceTree = "<group>"; };
+		612FFED516D5E307003F003C /* BHErrorLogsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BHErrorLogsViewController.xib; sourceTree = "<group>"; };
 		61487B2316C1DC8600F47241 /* UUIDPoc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UUIDPoc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61487B2716C1DC8600F47241 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		61487B2916C1DC8600F47241 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -255,6 +267,8 @@
 				61487B5C16C1DD7300F47241 /* BHRootViewController.m */,
 				61487B6816C1E4B900F47241 /* BHDashboardViewController.h */,
 				61487B6916C1E4B900F47241 /* BHDashboardViewController.m */,
+				612FFECB16D5D9AE003F003C /* BHErrorLogsViewController.h */,
+				612FFECC16D5D9AE003F003C /* BHErrorLogsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -264,6 +278,8 @@
 			children = (
 				61487B6B16C1E4CD00F47241 /* BHDashboardViewController.xib */,
 				61487B7616C2122800F47241 /* BHDashboardCollectionViewCellContentView.xib */,
+				612FFED316D5DCF6003F003C /* BHErrorLogTableViewCellContentView.xib */,
+				612FFED516D5E307003F003C /* BHErrorLogsViewController.xib */,
 			);
 			name = XIB;
 			sourceTree = "<group>";
@@ -316,6 +332,8 @@
 				61487B7116C2113100F47241 /* BHDashboardCollectionViewCell.m */,
 				61487B7316C2116100F47241 /* BHDashboardCollectionViewCellContentView.h */,
 				61487B7416C2116100F47241 /* BHDashboardCollectionViewCellContentView.m */,
+				612FFECF16D5DB34003F003C /* BHErrorLogTableViewCellContentView.h */,
+				612FFED016D5DB34003F003C /* BHErrorLogTableViewCellContentView.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -418,6 +436,8 @@
 				61487B3E16C1DC8600F47241 /* Default-568h@2x.png in Resources */,
 				61487B6C16C1E4CD00F47241 /* BHDashboardViewController.xib in Resources */,
 				61487B7716C2122800F47241 /* BHDashboardCollectionViewCellContentView.xib in Resources */,
+				612FFED416D5DCF6003F003C /* BHErrorLogTableViewCellContentView.xib in Resources */,
+				612FFED616D5E307003F003C /* BHErrorLogsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +491,8 @@
 				61A3FAA216D2C7EF00735DA2 /* BHDBObject.m in Sources */,
 				61A3FAA516D2C8DF00735DA2 /* BHTransfer.m in Sources */,
 				61A3FAA816D2CA4E00735DA2 /* BHDebugLog.m in Sources */,
+				612FFECD16D5D9AE003F003C /* BHErrorLogsViewController.m in Sources */,
+				612FFED116D5DB34003F003C /* BHErrorLogTableViewCellContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +519,8 @@
 				61C5D7A216D45FF200D64CE0 /* BHRootViewController.m in Sources */,
 				61C5D7A316D45FF200D64CE0 /* BHDashboardViewController.m in Sources */,
 				61C5D78D16D45FB800D64CE0 /* UUIDPocTests.m in Sources */,
+				612FFECE16D5D9AE003F003C /* BHErrorLogsViewController.m in Sources */,
+				612FFED216D5DB34003F003C /* BHErrorLogTableViewCellContentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +677,7 @@
 				61C5D79016D45FB800D64CE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

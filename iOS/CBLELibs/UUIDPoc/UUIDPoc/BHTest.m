@@ -103,6 +103,8 @@
     return [NSString stringWithFormat:@"%@<%p>\n%@",NSStringFromClass(self.class),self,[self dictionaryRep]];
 }
 
+#pragma mark Core Data Helper Methods
+
 -(DBTest*)DBTestWithPersistentStore:(NSPersistentStoreCoordinator*)persistentStore andContext:(NSManagedObjectContext*)currentContext
 {
     if(currentContext && persistentStore)
@@ -131,6 +133,16 @@
         }
         
         return test;
+    }
+    return nil;
+}
+
+-(NSManagedObjectID*)managedObjectIDWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)persistentStoreCoordinator
+{
+    if(persistentStoreCoordinator && self.managedObjectURI)
+    {
+        NSManagedObjectID *objectID = [persistentStoreCoordinator managedObjectIDForURIRepresentation:self.managedObjectURI];
+        return objectID;
     }
     return nil;
 }

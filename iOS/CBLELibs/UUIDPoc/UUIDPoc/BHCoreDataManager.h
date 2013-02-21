@@ -20,11 +20,24 @@ typedef void(^BHCoreDataManagerArrayResponseBlock)(NSArray *queryResults);
 
 +(BHCoreDataManager*)sharedManager;
 
+#pragma mark - Transfers
+-(void)getAllTransfersForTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock;
+
+-(void)saveTransfer:(BHTransfer*)bhTransfer forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock;
+
+#pragma mark - DebugLogs
+-(void)logDebug:(BHDebugLog*)bhLog forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock;
+
+-(void)getAllDebugLogsForTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock;
+
 #pragma mark - Errors
 -(void)logError:(BHError*)bhError forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock;
 
-#pragma mark - Tests
+-(void)logErrors:(NSArray*)bhErrors forTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerBOOLResponseBlock)completeBlock;
 
+-(void)getAllErrorsForTest:(BHTest*)bhTest withCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock;
+
+#pragma mark - Tests
 -(void)getLastTestWithCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock;
 
 -(void)getAllTestsWithCompleteBlock:(BHCoreDataManagerArrayResponseBlock)completeBlock includeAllPropertyData:(BOOL)includeAllPropertyData;
